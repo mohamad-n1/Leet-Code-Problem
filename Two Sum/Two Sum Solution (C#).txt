@@ -1,0 +1,50 @@
+Two Sum Solution (C#)
+
+🧠 Intuition
+We need to find **two numbers** in the array whose sum equals the given `target`.  
+The simplest idea is to check all possible pairs of numbers until we find the right pair.
+
+
+🪄 Approach
+1. Use two pointers — one starting from the beginning (i) and one from the end (tedad).  
+2. Check if nums[i] + nums[tedad] equals the target.  
+3. If yes → return their indexes.  
+4. If not → move the end pointer (tedad) one step to the left and start checking again from the beginning.  
+5. Repeat this until the correct pair is found.
+
+
+
+⏱️ Complexity
+    Time complexity: 
+  You may check almost every pair → O(n²)
+
+    Space complexity:  
+  Only a few extra variables → O(1)
+
+
+✅ Code
+    csharp
+public class Solution {
+    public int[] TwoSum(int[] nums, int target) {
+        int tedad = nums.Length - 1;
+        int counter = 0;
+        int[] export = {0, 0};
+
+        for (int i = 0; i < nums.Length - counter; i++)
+        {
+            if (nums[i] + nums[tedad] == target)
+            {
+                export[0] = i;
+                export[1] = tedad;
+                return export;
+            }
+            else if (i == tedad - 1)
+            {
+                tedad--;
+                i = -1;
+                counter++;
+            }
+        }
+        return null;
+    }
+}
