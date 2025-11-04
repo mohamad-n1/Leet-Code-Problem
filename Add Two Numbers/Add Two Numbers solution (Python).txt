@@ -1,0 +1,58 @@
+🧠 Intuition:
+The goal of this code is to simulate the addition of two large numbers represented as arrays of digits.
+Since addition is done from right to left (like in manual addition), we process both lists from the end, keeping track of the carry at each step.
+
+Approach:
+
+Use the helper function check() to pop the last element of a list and return it.
+If the list is empty, return 0 instead (to handle different lengths safely).
+
+Iterate from the end of both lists:
+
+Add the last digits of l1 and l2 along with the previous carry (digit).
+
+If the sum is less than 10, append it directly to the result.
+
+Otherwise, store the last digit (sum % 10) and set digit = 1 to carry over to the next step.
+
+After the loop, if there is still a carry left (digit != 0), append it to the result.
+
+Finally, print the result (the digits of the sum).
+
+⏱️ Complexity:
+
+Time complexity: O(n)
+Each digit from both input lists is processed once.
+
+Space complexity: O(n)
+A new list result is created to store the digits of the sum.
+
+💻 Code:
+def check(arr):
+    try:
+        return arr.pop()
+    except:
+        return 0
+
+def addTwoNumbers(l1, l2):
+    result = []
+    container = 0 
+    digit = 0
+    for i in range(len(l1)-1, -1, -1):
+        container = check(l1) + check(l2) + digit
+        digit = 0
+        if container < 10:
+            result.append(container)
+        else:
+            digit = 1
+            result.append(container % 10)
+        container = 0 
+    if digit != 0:
+        result.append(digit)
+    print(result)
+
+
+list1 = [9,9,9,9,9,9,9]
+list2 = [9,9,9,9]
+
+addTwoNumbers(list1, list2)
