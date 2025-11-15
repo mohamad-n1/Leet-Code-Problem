@@ -1,0 +1,73 @@
+Intuition
+
+The longest common prefix among several strings must be a prefix of each one of them.
+By comparing the strings one by one and gradually reducing the shared prefix, we can determine the maximum prefix they all have in common. If at any point the prefix becomes empty, it means no common prefix exists.
+
+---
+
+Approach
+
+1. Start by taking the first string as the initial prefix container.
+2. Compare this prefix with each of the remaining strings in the array.
+3. For each comparison, go through the characters and build the common part between the current prefix and the current string.
+4. Update the prefix with this newly found common substring.
+5. Continue until all strings are processed.
+6. The final prefix value is the longest common prefix shared by all strings.
+
+---
+
+Complexity
+
+* Time complexity:
+  The algorithm compares characters between the prefix and every string. In the worst case, each character of each string may be checked.
+  Time Complexity:
+  [
+  O(n \cdot m)
+  ]
+  where *n* is the number of strings and *m* is the length of the shortest string.
+
+* Space complexity:
+  The algorithm stores only a few additional strings and variables.
+  Space Complexity:
+  [
+  O(1)
+  ]
+
+---
+
+Code
+public class Solution {
+    public string LongestCommonPrefix(string[] strs) {
+        string container = strs[0];
+        int counter = 1;
+        string result="";
+        bool flag = false;
+        while (counter < strs.Length)
+        {
+            result = "";
+            for (int i = 0; i < container.Length; i++){
+                flag = false;
+                for (int j = i; j < strs[counter].Length && j < container.Length; j++){
+                    if (container[i] == strs[counter][j]){
+                        flag = true;
+                        result += strs[counter][j];
+                        break;
+                    }
+                    if (result == "")
+                        return "";
+                    if (result != "" && j == result.Length)
+                        break;
+                    
+                }
+                if (flag == false)
+                    break;
+            }
+            container = result;
+            counter++;
+            
+        }
+        return container;
+    }
+}
+
+---
